@@ -284,6 +284,7 @@ def get_pose(keypoints):
         
         pose_best = max(poses_valid, key=lambda x: x[1])
 
-        print("Best pose: ", pose_best[0])
+        if DEBUG_MODE:
+            print("Best pose: ", pose_best[0])
 
         return pose_best[0]

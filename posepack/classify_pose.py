@@ -92,10 +92,12 @@ def is_bow(left_shoulder, right_shoulder, left_hip, right_hip, left_knee, right_
     else:
         return "", 0
 
-def is_handsup(nose, left_shoulder, right_shoulder, left_wrist, right_wrist, left_hip, right_hip, left_knee, right_knee, left_ankle, right_ankle):
+def is_handsup(nose, left_shoulder, right_shoulder, left_elbow, right_elbow, left_wrist, right_wrist, left_hip, right_hip, left_knee, right_knee, left_ankle, right_ankle):
     nose_x, nose_y, nose_visibility, nose_presence = nose
     left_shoulder_x, left_shoulder_y, left_shoulder_visibility, left_shoulder_presence = left_shoulder
     right_shoulder_x, right_shoulder_y, right_shoulder_visibility, right_shoulder_presence = right_shoulder
+    left_elbow_x, left_elbow_y, left_elbow_visibility, left_elbow_presence = left_elbow
+    right_elbow_x, right_elbow_y, right_elbow_visibility, right_elbow_presence = right_elbow
     left_wrist_x, left_wrist_y, left_wrist_visibility, left_wrist_presence = left_wrist
     right_wrist_x, right_wrist_y, right_wrist_visibility, right_wrist_presence = right_wrist
     left_hip_x, left_hip_y, left_hip_visibility, left_hip_presence = left_hip
@@ -120,29 +122,36 @@ def is_handsup(nose, left_shoulder, right_shoulder, left_wrist, right_wrist, lef
 
     angle_hip_left = get_angle(left_hip, left_shoulder, left_ankle)
     angle_hip_right = get_angle(right_hip, right_shoulder, right_ankle)
+    angle_elbow_left = get_angle(left_elbow, left_shoulder, left_wrist)
+    angle_elbow_right = get_angle(right_elbow, right_shoulder, right_wrist)
 
-    min_presence = min(nose_presence,
-                       left_shoulder_presence, right_shoulder_presence,
-                       left_wrist_presence, right_wrist_presence,
-                       left_hip_presence, right_hip_presence,
-                       left_knee_presence, right_knee_presence,
-                       left_ankle_presence, right_ankle_presence)
-    
     # min_presence = min(nose_presence,
     #                    left_shoulder_presence, right_shoulder_presence,
-    #                    left_wrist_presence, right_wrist_presence)
+    #                    left_elbow_presence, right_elbow_presence,
+    #                    left_wrist_presence, right_wrist_presence,
+    #                    left_hip_presence, right_hip_presence,
+    #                    left_knee_presence, right_knee_presence,
+    #                    left_ankle_presence, right_ankle_presence)
+    
+    min_presence = min(nose_presence,
+                       left_shoulder_presence, right_shoulder_presence,
+                       left_elbow_presence, right_elbow_presence,
+                       left_wrist_presence, right_wrist_presence)
 
     if DEBUG_MODE:
         print("Handsup: ")
         print("手臂夹角: ", angle_arm)
         print("左髋关节角度: ", angle_hip_left)
         print("右髋关节角度: ", angle_hip_right)
+        print("左肘关节角度: ", angle_elbow_left)
+        print("右肘关节角度: ", angle_elbow_right)
         print("特征点最小置信度:", min_presence)
 
     is_armoverhead = left_wrist_y < nose_y and right_wrist_y < nose_y
+    is_handsup = angle_elbow_left > 150 and angle_elbow_right > 150
 
-    if (angle_hip_left > 150 and angle_hip_right > 150 and min_presence > 0.3):
-    # if (min_presence > 0.3):
+    # if (angle_hip_left > 150 and angle_hip_right > 150 and is_handsup and min_presence > 0.3):
+    if (is_handsup and min_presence > 0.3):
         if (angle_arm < 40 and is_armoverhead):
             return "Handsup-I", min_presence
         elif (angle_arm > 40 and angle_arm < 100 and is_armoverhead):
@@ -268,7 +277,7 @@ def get_pose(keypoints):
         pose_bow, presence_bow = is_bow(left_shoulder, right_shoulder, left_hip, right_hip, left_knee, right_knee, left_ankle, right_ankle)
         pose_kneel, presence_kneel = is_kneel(left_shoulder, right_shoulder, left_hip, right_hip, left_knee, right_knee, left_ankle, right_ankle) 
         pose_squart, presence_squart = is_squart(left_shoulder, right_shoulder, left_hip, right_hip, left_knee, right_knee, left_ankle, right_ankle)
-        pose_handsup, presence_handsup = is_handsup(nose, left_shoulder, right_shoulder, left_wrist, right_wrist, left_hip, right_hip, left_knee, right_knee, left_ankle, right_ankle)
+        pose_handsup, presence_handsup = is_handsup(nose, left_shoulder, right_shoulder, left_elbow, right_elbow, left_wrist, right_wrist, left_hip, right_hip, left_knee, right_knee, left_ankle, right_ankle)
 
         poses = [
             (pose_armcrossed, presence_armcrossed),

@@ -79,8 +79,8 @@ def is_bow(left_shoulder, right_shoulder, left_hip, right_hip, left_knee, right_
         print("Bow: ")
         print("左髋关节角度: ", angle_hip_left)
         print("右髋关节角度: ", angle_hip_right)
-        print("左膝盖角度: ", angle_knee_left)
-        print("右膝盖角度: ", angle_knee_right)
+        print("左膝关节角度: ", angle_knee_left)
+        print("右膝关节角度: ", angle_knee_right)
         print("特征点最小置信度:", min_presence)
 
     if (angle_hip_left > 90 and angle_hip_right > 90 and
@@ -187,8 +187,8 @@ def is_kneel(left_shoulder, right_shoulder, left_hip, right_hip, left_knee, righ
         print("Kneel: ")
         print("左髋关节角度: ", angle_hip_left)
         print("右髋关节角度: ", angle_hip_right)
-        print("左膝盖角度: ", angle_knee_left)
-        print("右膝盖角度: ", angle_knee_right)
+        print("左膝关节角度: ", angle_knee_left)
+        print("右膝关节角度: ", angle_knee_right)
         print("特征点最小置信度:", min_presence)
 
     if (angle_hip_left > 120 and angle_hip_right > 120 and
@@ -223,8 +223,8 @@ def is_squart(left_shoulder, right_shoulder, left_hip, right_hip, left_knee, rig
         print("Squart: ")
         print("左髋关节角度: ", angle_hip_left)
         print("右髋关节角度: ", angle_hip_right)
-        print("左膝盖角度: ", angle_knee_left)
-        print("右膝盖角度: ", angle_knee_right)
+        print("左膝关节角度: ", angle_knee_left)
+        print("右膝关节角度: ", angle_knee_right)
         print("特征点最小置信度:", min_presence)
 
     if (angle_hip_left < 120 and angle_hip_right < 120 and

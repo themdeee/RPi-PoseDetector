@@ -28,7 +28,8 @@ webcam_constraints_720P = {
 3. webcam输入 
 4. image输入 5. image按钮
 6. image输出
-7. resolution下拉框 8. rotate下拉框 9. flip选择框 10. keypoints选择框
+7. resolution下拉框 8. rotate下拉框
+9. flip选择框 10. keypoints选择框
 11.checkbox列布局
 12.markdown引导 13.image引导
 14.frame数目选择框
@@ -42,7 +43,8 @@ def read_dropdown_input(choice):
             gr.update(visible=False, interactive=False), 
             gr.update(visible=False, interactive=False), gr.update(visible=False, interactive=False),
             gr.update(value=None),
-            gr.update(visible=True, interactive=True), gr.update(visible=True, interactive=True), gr.update(visible=True, interactive=True), gr.update(visible=True, interactive=True),
+            gr.update(visible=True, interactive=True), gr.update(visible=True, interactive=True),
+            gr.update(visible=True, interactive=True, value=posepack.vars.flag_flip), gr.update(visible=True, interactive=True, value=posepack.vars.flag_keypoints),
             gr.update(visible=True),
             gr.update(visible=False), gr.update(visible=False),
             gr.update(visible=True)
@@ -53,7 +55,8 @@ def read_dropdown_input(choice):
             gr.update(visible=True, interactive=True, value=None), 
             gr.update(visible=False, interactive=False), gr.update(visible=False, interactive=False),
             gr.update(value=None),
-            gr.update(visible=True, interactive=True), gr.update(visible=True, interactive=True), gr.update(visible=True, interactive=True), gr.update(visible=True, interactive=True),
+            gr.update(visible=True, interactive=True), gr.update(visible=True, interactive=True),
+            gr.update(visible=True, interactive=True, value=posepack.vars.flag_flip), gr.update(visible=True, interactive=True, value=posepack.vars.flag_keypoints),
             gr.update(visible=True),
             gr.update(visible=False), gr.update(visible=False),
             gr.update(visible=True)
@@ -64,7 +67,8 @@ def read_dropdown_input(choice):
             gr.update(visible=False, interactive=False), 
             gr.update(visible=True, interactive=True, value=None), gr.update(visible=True, interactive=True),
             gr.update(value=None),
-            gr.update(visible=False, interactive=False), gr.update(visible=False, interactive=False), gr.update(visible=False, interactive=False), gr.update(visible=True, interactive=True),
+            gr.update(visible=False, interactive=False), gr.update(visible=False, interactive=False),
+            gr.update(visible=False, interactive=False, value=posepack.vars.flag_flip), gr.update(visible=True, interactive=True, value=posepack.vars.flag_keypoints),
             gr.update(visible=True),
             gr.update(visible=False), gr.update(visible=False),
             gr.update(visible=False)
@@ -75,7 +79,8 @@ def read_dropdown_input(choice):
             gr.update(visible=False, interactive=False), 
             gr.update(visible=False, interactive=False), gr.update(visible=False, interactive=False),
             gr.update(value=None),
-            gr.update(visible=False, interactive=False), gr.update(visible=False, interactive=False), gr.update(visible=False, interactive=False), gr.update(visible=False, interactive=False),
+            gr.update(visible=False, interactive=False), gr.update(visible=False, interactive=False),
+            gr.update(visible=False, interactive=False, value=posepack.vars.flag_flip), gr.update(visible=False, interactive=False, value=posepack.vars.flag_keypoints),
             gr.update(visible=False),
             gr.update(visible=False), gr.update(visible=False),
             gr.update(visible=False)

@@ -1,0 +1,5 @@
+.vscode
+.gitattributes
+__pycache__
+posepack/__pycache__
+test

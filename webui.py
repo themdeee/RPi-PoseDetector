@@ -90,14 +90,14 @@ def read_checkbox_flip(value):
     if value:
         posepack.vars.flag_flip = True
         return (
-            gr.update(mirror_webcam=True),
-            gr.update(mirror_webcam=True)
+            gr.update(webcam_options=gr.WebcamOptions(mirror=True)),
+            gr.update(webcam_options=gr.WebcamOptions(mirror=True))
         )
     else:
         posepack.vars.flag_flip = False
         return (
-            gr.update(mirror_webcam=False),
-            gr.update(mirror_webcam=False)
+            gr.update(webcam_options=gr.WebcamOptions(mirror=False)),
+            gr.update(webcam_options=gr.WebcamOptions(mirror=False))
         )
     
 def read_dropdown_rotate(choice):
@@ -120,16 +120,16 @@ def change_button_usbcam():
 def read_dropdown_resolution(choice):
     if choice == "720p":
         posepack.vars.resolution = 720
-        return gr.update(webcam_constraints=webcam_constraints_720P)
+        return gr.update(webcam_options=gr.WebcamOptions(constraints=webcam_constraints_720P))
     elif choice == "540p":
         posepack.vars.resolution = 540
-        return gr.update(webcam_constraints=webcam_constraints_540P)
+        return gr.update(webcam_options=gr.WebcamOptions(constraints=webcam_constraints_540P))
     elif choice == "360p":
         posepack.vars.resolution = 360
-        return gr.update(webcam_constraints=webcam_constraints_360P)
+        return gr.update(webcam_options=gr.WebcamOptions(constraints=webcam_constraints_360P))
     else:
         posepack.vars.resolution = 360
-        return gr.update(webcam_constraints=webcam_constraints_360P)
+        return gr.update(webcam_options=gr.WebcamOptions(constraints=webcam_constraints_360P))
 
 def read_checkbox_keypoints(value):
     if value:
@@ -233,7 +233,6 @@ with gr.Blocks() as demo:
                 label="usbcam",
                 interactive=False,
                 visible=False,
-                mirror_webcam=False,
                 streaming=True
             )
             
@@ -242,9 +241,11 @@ with gr.Blocks() as demo:
                 label="webcam",
                 interactive=True,
                 visible=False,
-                mirror_webcam=False,
                 streaming=True,
-                webcam_constraints=webcam_constraints_360P
+                webcam_options=gr.WebcamOptions(
+                    mirror=False,
+                    constraints=webcam_constraints_360P
+                )
             )
             
             input_image=gr.Image(
@@ -277,7 +278,9 @@ with gr.Blocks() as demo:
                 label="output",
                 streaming=True,
                 interactive=False,
-                mirror_webcam=False
+                webcam_options=gr.WebcamOptions(
+                    mirror=False
+                )
             )
         
         dropdown_input.change(

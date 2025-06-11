@@ -1,2 +1,6 @@
 mediapipe
-gradio==5.24.0
+gradio==5.26.0
+
+# 树莓派5目前可用
+# mediapipe==0.10.18
+# gradio==5.26.0

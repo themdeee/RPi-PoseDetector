@@ -2,7 +2,7 @@
 
 ## 先说结论
 
-- 对于在树莓派5上运行MediaPipe，运行模式选择GPU模式的运行速度并不比CPU要快
+- 对于在树莓派5上运行MediaPipe，运行模式选择GPU模式的运行速度并不见得比CPU要快~~也可能是还需在代码层面加入一些GPU加速技巧~~
 - 直接拉取MediaPipe源码编译即可，MediaPipe提供的Dockerfile缺乏维护，若使用Docker编译会让修复报错变得复杂麻烦
 - 本文主要参考了[MediaPipe官方文档](https://ai.google.dev/edge/mediapipe/framework/getting_started/install?hl=zh-cn#installing_on_debian_and_ubuntu)和[Linux 下编译安装 OpenGL GPU 支持的 mediapipe 指南](https://butui.me/posts/build-mediapipe-from-the-source-with-gpu-support-by-opengl/)，在此致谢
 
